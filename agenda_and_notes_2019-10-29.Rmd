@@ -32,3 +32,33 @@ output: html_document
   - variable name scope in functions
   - matrix multiplication and generalizing the simulation function
   
+```{r}
+library(tidyverse)
+unbalanced_data <- data.frame(condition = c(rep(0, 30), 
+                                            rep(1, 70)))
+
+intercept <- 0
+slope <- 50
+sigma <- 1
+
+unbalanced_data$response <- intercept + 
+  slope * unbalanced_data$condition + 
+  rnorm(nrow(unbalanced_data), 0, sigma)
+
+unbalanced_data <- unbalanced_data %>% 
+  mutate(response = intercept +
+           slope * condition +
+           rnorm(nrow(.), 0, sigma))
+
+unbalanced_data %>% group_by(condition) %>% 
+  summarize(mean = mean(response), N = n())
+
+summary(lm(response ~ 1 + condition, unbalanced_data))
+
+unbalanced_data <- unbalanced_data %>% 
+  mutate(condition.c = condition - .5,
+         condition.scaled = as.numeric(scale(condition,
+                                             scale = FALSE)))
+
+```
+
