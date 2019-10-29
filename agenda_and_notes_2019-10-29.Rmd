@@ -25,3 +25,10 @@ output: html_document
   - where to next?
     - more "simple" regression stuff
     - linear MEMs
+
+5. Some random tips
+  - mistake in "solutions" file
+  - sigma = sd
+  - variable name scope in functions
+  - matrix multiplication and generalizing the simulation function
+  
